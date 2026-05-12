@@ -44,7 +44,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     mouse_press = pygame.MOUSEBUTTONUP
-    font = pygame.font.Font(None, size=20)
+    font = pygame.font.Font(None, size=50)
 
     # Color vars
     rgba_value = ()
@@ -90,6 +90,8 @@ def main():
                 running = False
 
         # Render & Display
+        screen.fill('Grey')
+        screen.blit(user_file, dest=(50,50))
         screen.blit(rgb_text, ((screen.width/2) + 200, 50))
         screen.blit(hex_text, ((screen.width/2) + 200, screen.height/2))
         pygame.display.flip()
