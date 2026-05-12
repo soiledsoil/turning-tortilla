@@ -3,7 +3,7 @@ from tkinterdnd2 import DND_FILES, TkinterDnD
 import pygame
 
 
-# Drag and drop code taken from 
+# Drag and drop code taken and modified from 
 # https://pythonguides.com/python-tkinter-drag-and-drop/
 file_path = ""
 
@@ -13,14 +13,16 @@ def drop_file(event):
     file_path = event.data  # File path as a string
     label.config(text=f"Dropped file:\n{file_path}")
 
-
+# Creation of the tkinter window
 root = TkinterDnD.Tk()
 root.geometry("500x300")
 root.title("File Drag and Drop")
 
+# Label/Graphic creation
 label = tk.Label(root, text="Drag & Drop a file here then close the window",
                   bg="lightgray", width=50, height=10)
 label.pack(pady=50)
+
 
 label.drop_target_register(DND_FILES)
 label.dnd_bind("<<Drop>>", drop_file)
@@ -32,9 +34,13 @@ def main():
     pygame.init
     pygame.display.init()
     pygame.display.set_caption("Eyedropper Color picker")
+
     clock = pygame.time.Clock()
     dt = 0
     mouse_press = pygame.MOUSEBUTTONUP
+    rgba_value = ()
+
+    # Image Loader
     user_file = pygame.image.load(file_path)
     image_x = user_file.get_width() + 500
     image_y = user_file.get_height() + 100
@@ -51,8 +57,9 @@ def main():
         # Event Loop
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_press = event
-                print (mouse_press)
+                mouse_pos = pygame.mouse.get_pos()
+                rgba_value = screen.get_at(mouse_pos)
+                print (rgba_value)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 running = False
