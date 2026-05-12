@@ -1,20 +1,12 @@
-import pyglet
+from tkinter import *
+from tkinter import ttk
+import pygame
 
-def main():
-    window = pyglet.window.Window()
-    label = pyglet.text.Label('Hello, world',
-                            font_name='Times New Roman',
-                            font_size=36,
-                            x=window.width//2, y=window.height//2,
-                            anchor_x='center', anchor_y='center')
-        
-    pyglet.app.run()
 
-    on_draw(window, label)
 
-def on_draw(window, label):
-    window.clear()
-    label.draw()
-
-if __name__ == "__main__":
-    main()
+root = Tk()
+frm = ttk.Frame(root, padding=10)
+frm.grid()
+ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
+ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
+root.mainloop()
