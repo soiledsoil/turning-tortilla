@@ -3,6 +3,12 @@ from tkinterdnd2 import DND_FILES, TkinterDnD
 import pygame
 
 
+def rbg_to_hex (rgb):
+    # Convertion line taken from
+    # https://stackoverflow.com/questions/3380726/converting-an-rgb-color-tuple-to-a-hexidecimal-string
+    hex_value = '#%02x%02x%02x' % (rgb)
+    return (hex_value)
+
 # Drag and drop code taken and modified from 
 # https://pythonguides.com/python-tkinter-drag-and-drop/
 file_path = ""
@@ -39,7 +45,7 @@ def main():
     dt = 0
     mouse_press = pygame.MOUSEBUTTONUP
     rgba_value = ()
-
+    hex_value = ""
     # Image Loader
     user_file = pygame.image.load(file_path)
     image_x = user_file.get_width() + 500
@@ -59,7 +65,8 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 rgba_value = screen.get_at(mouse_pos)
-                print (rgba_value)
+                rgba_value = rgba_value[0:3]
+                hex_value = rbg_to_hex(rgba_value)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 running = False
