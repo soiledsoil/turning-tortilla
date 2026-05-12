@@ -5,10 +5,14 @@ import pygame
 
 # Drag and drop code taken from 
 # https://pythonguides.com/python-tkinter-drag-and-drop/
+file_path = ""
+
 def drop_file(event):
     """Handles the dropped file path."""
-    file_path = event.data  
+    global file_path
+    file_path = event.data  # File path as a string
     label.config(text=f"Dropped file:\n{file_path}")
+
 
 root = TkinterDnD.Tk()
 root.geometry("500x300")
@@ -31,8 +35,16 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     mouse_press = pygame.MOUSEBUTTONUP
-    resolution = ([800,600])
-    screen = pygame.display.set_mode(size=resolution)
+    user_file = pygame.image.load(file_path)
+    image_x = user_file.get_width() + 500
+    image_y = user_file.get_height() + 100
+
+    resolution = ([image_x,image_y])
+    screen = pygame.display.set_mode(size=resolution, flags=pygame.SCALED|
+                                     pygame.FULLSCREEN)
+
+    screen.fill("Grey")
+    screen.blit(user_file, dest=(50,50))
 
     running = True
     while running:
@@ -46,7 +58,6 @@ def main():
                 running = False
 
         # Render & Display
-        screen.fill('Black')
         pygame.display.flip()
         dt = clock.tick(24)
 
