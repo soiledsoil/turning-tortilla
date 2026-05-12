@@ -73,8 +73,8 @@ def main():
 
     # Image Loader
     user_file = pygame.image.load(file_path)
-    image_x = user_file.get_width() + 500
-    image_y = user_file.get_height() + 100
+    image_x = user_file.get_width() + 400
+    image_y = user_file.get_height() + 200
 
     resolution = ([image_x,image_y])
     screen = pygame.display.set_mode(size=resolution, flags=pygame.SCALED|
@@ -84,12 +84,12 @@ def main():
     screen.fill("Grey")
     screen.blit(user_file, dest=(50,50))
     rgb_text = font.render(str(rgba_value),antialias=True, color="White")
-    screen.blit(rgb_text, ((screen.width/2) + 200, 50))
+    screen.blit(rgb_text, dest=((screen.width/2) + 100, 50))
     hex_text = font.render(hex_value,antialias=True, color="White")
-    screen.blit(hex_text, ((screen.width/2) + 200, screen.height/2))
+    screen.blit(hex_text, dest=((screen.width/2) + 100, screen.height/2))
 
-    rgb_copy = button(int ((screen.width/2) + 200), 150, 200, 100, "Copy RGB")
-    hex_copy = button(int ((screen.width/2) + 200), int(screen.height/2 + 100),
+    rgb_copy = button(int ((screen.width/2)), 100, 200, 100, "Copy RGB")
+    hex_copy = button(int ((screen.width/2)), int(screen.height/2 + 50),
                        200, 100, "Copy hex")
     rgb_copy.draw(screen)
     hex_copy.draw(screen)
@@ -130,8 +130,8 @@ def main():
         rgb_copy.draw(screen)
         hex_copy.draw(screen)
         screen.blit(user_file, dest=(50,50))
-        screen.blit(rgb_text, ((screen.width/2) + 200, 50))
-        screen.blit(hex_text, ((screen.width/2) + 200, screen.height/2))
+        screen.blit(rgb_text, ((screen.width/2) + 50, 50))
+        screen.blit(hex_text, ((screen.width/2) + 50, screen.height/2))
         pygame.display.flip()
         dt = clock.tick(60)
 
